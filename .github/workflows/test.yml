@@ -5,23 +5,7 @@ on:
   pull_request:
 
 jobs:
-  gemfiles:
-    runs-on: ubuntu-latest
-
-    outputs:
-      value: ${{ steps.to-json.outputs.value }}
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - id: to-json
-        run: |
-          gemfiles=$(ls gemfiles/*.gemfile | jq --raw-input --slurp --compact-output '. / "\n" - [""]')
-          echo "::set-output name=value::$gemfiles"
-
   test:
-    needs: gemfiles
-
     strategy:
       matrix:
         ruby:
@@ -29,15 +13,23 @@ jobs:
           - 3.0
           - head
 
-        gemfile: ${{ fromJson(needs.gemfiles.outputs.value) }}
+        factory_bot:
+          - ~> 5.0
+          - ~> 6.0
+
+        activerecord:
+          - ~> 6.0.0
+          - ~> 6.1.0
+          - ~> 7.0.0.alpha
 
     runs-on: ubuntu-latest
 
-    env:
-      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
-
     steps:
     - uses: actions/checkout@v2
+
+    - run: |
+        echo "gem 'factory_bot', '${{ matrix.factory_bot }}'" >> Gemfile
+        sed --in-place "s/gem 'activerecord'/gem 'activerecord', '${{ matrix.activerecord }}'/" Gemfile
 
     - uses: ruby/setup-ruby@v1
       with:

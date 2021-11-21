@@ -6,7 +6,7 @@ RSpec::Core::RakeTask.new :spec
 task default: %i(
   readme
   update
-  spec:all
+  spec
 )
 
 task :readme do
@@ -14,11 +14,5 @@ task :readme do
 end
 
 task :update do
-  sh 'bundle update'
-  sh 'bundle exec appraisal clean'
-  sh 'bundle exec appraisal generate'
-end
-
-task 'spec:all' do
-  sh 'bundle exec appraisal rspec'
+  sh 'bundle update --quiet'
 end
