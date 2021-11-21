@@ -12,15 +12,21 @@ jobs:
           - 2.7
           - 3.0
           - head
-
         factory_bot:
-          - ~> 5.0
           - ~> 6.0
-
         activerecord:
-          - ~> 6.0.0
           - ~> 6.1.0
-          - ~> 7.0.0.alpha
+
+        include:
+          - ruby: 3.0
+            factory_bot: ~> 5.0 # previous version
+            activerecord: ~> 6.1.0
+          - ruby: 3.0
+            factory_bot: ~> 6.0
+            activerecord: ~> 6.0.0 # previous version
+          - ruby: 3.0
+            factory_bot: ~> 6.0
+            activerecord: ~> 7.0.0.alpha # pre-release version
 
     runs-on: ubuntu-latest
 
