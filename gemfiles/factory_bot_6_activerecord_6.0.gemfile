@@ -8,5 +8,6 @@ gem "debug"
 gem "rake"
 gem "rspec"
 gem "sqlite3"
+gem "factory_bot", "~> 6.0"
 
 gemspec path: "../"
