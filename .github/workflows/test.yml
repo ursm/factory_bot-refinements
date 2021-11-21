@@ -5,26 +5,31 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
     strategy:
       matrix:
         ruby:
-          - '2.7'
-          - '3.0'
+          - 2.7
+          - 3.0
           - head
 
+        factory_bot:
+          - ~> 5.0
+          - ~> 6.0
+
         activerecord:
-          - '6.0'
-          - '6.1'
-          - '7.0'
+          - ~> 6.0.0
+          - ~> 6.1.0
+          - ~> 7.0.0.alpha
 
     runs-on: ubuntu-latest
 
-    env:
-      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/activerecord_${{ matrix.activerecord }}.gemfile
-
     steps:
     - uses: actions/checkout@v2
+
+    - run: |
+        echo "gem 'factory_bot', '${{ matrix.factory_bot }}'" >> Gemfile
+        sed --in-place "s/gem 'activerecord'/gem 'activerecord', '${{ matrix.activerecord }}'/" Gemfile
 
     - uses: ruby/setup-ruby@v1
       with:

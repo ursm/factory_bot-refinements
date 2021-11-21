@@ -3,17 +3,16 @@ require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new :spec
 
-task default: %i(update spec:all readme)
-
-task :update do
-  sh 'bundle update'
-  sh 'bundle exec appraisal update'
-end
-
-task 'spec:all' do
-  sh 'bundle exec appraisal rspec'
-end
+task default: %i(
+  readme
+  update
+  spec
+)
 
 task :readme do
   sh 'handlematters README.md.hms > README.md'
+end
+
+task :update do
+  sh 'bundle update --quiet'
 end
