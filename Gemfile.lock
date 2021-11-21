@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    factory_bot-refinements (0.1.0)
+    factory_bot-refinements (0.1.1)
       factory_bot
 
 GEM
