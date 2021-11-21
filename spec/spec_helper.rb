@@ -31,40 +31,29 @@ ActiveRecord::Schema.define do
     t.string :name
   end
 
-  create_table :articles, force: :cascade do |t|
+  create_table :posts, force: :cascade do |t|
     t.references :author, to_table: :users
     t.string :title
-    t.boolean :featured
-  end
-
-  create_table :comments, force: :cascade do |t|
-    t.references :article
+    t.boolean :published
   end
 end
 
 class User < ActiveRecord::Base
-  has_many :articles, inverse_of: :author, foreign_key: 'author_id'
+  has_many :posts, inverse_of: :author, foreign_key: 'author_id'
 end
 
-class Article < ActiveRecord::Base
+class Post < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
-  has_many :comments
-end
-
-class Comment < ActiveRecord::Base
-  belongs_to :article
 end
 
 FactoryBot.define do
   factory :user
 
-  factory :article do
-    featured { false }
+  factory :post do
+    published { false }
 
-    factory :featured_article do
-      featured { true }
+    factory :published_post do
+      published { true }
     end
   end
-
-  factory :comment
 end

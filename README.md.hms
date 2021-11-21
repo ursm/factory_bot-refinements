@@ -55,9 +55,9 @@ describe MyApp do
     # Equivalent to:
     # FactoryBot.create(:post, :published, user: user, title: 'hello')
 
-    user.posts.factory(:featured_post).create_with_factory
+    user.posts.factory(:published_post).create_with_factory
     # Equivalent to:
-    # FactoryBot.create(:featured_post, user: user)
+    # FactoryBot.create(:published_post, user: user)
 
     user.posts.build_with_factory
     # Equivalent to:

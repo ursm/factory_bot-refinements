@@ -4,45 +4,47 @@ RSpec.describe FactoryBot::Refinements::ActiveRecord do
   example 'create/build association with a factory' do
     user = FactoryBot.create(:user)
 
-    article_1 = user.articles.create_with_factory(title: 'hello')
-    article_2 = user.articles.build_with_factory(title: 'bye')
+    post_1 = user.posts.create_with_factory(title: 'hello')
+    post_2 = user.posts.build_with_factory(title: 'bye')
 
-    expect(user.articles.size).to eq(2)
+    expect(user.posts).to contain_exactly(
+      have_attributes(
+        title:      'hello',
+        author:     user,
+        persisted?: true,
+      ),
 
-    expect(article_1).to be_persisted
-    expect(article_1.title).to eq('hello')
-    expect(article_1.author).to eq(user)
+      have_attributes(
+        title:      'bye',
+        author:     user,
+        persisted?: false,
+      )
+    )
+  end
 
-    comment_1 = article_1.comments.build_with_factory
-    comment_2 = article_1.comments.create_with_factory
+  example 'creating a child record affects the persistence of the parent record' do
+    user = FactoryBot.build(:user)
 
-    expect(comment_1).not_to be_persisted
-    expect(comment_2).to be_persisted
+    expect(user).not_to be_persisted
 
-    expect(article_2).not_to be_persisted
-    expect(article_2.title).to eq('bye')
-    expect(article_2.author).to eq(user)
+    expect {
+      user.posts.build_with_factory
+    }.not_to change { user.persisted? }.from(false)
 
-    comment_3 = article_2.comments.build_with_factory
-
-    expect(comment_3).not_to be_persisted
-    expect(article_2).not_to be_persisted
-
-    comment_4 = article_2.comments.create_with_factory
-
-    expect(comment_4).to be_persisted
-    expect(article_2).to be_persisted
+    expect {
+      user.posts.create_with_factory
+    }.to change { user.persisted? }.from(false).to(true)
   end
 
   example 'specify a factory' do
     user = FactoryBot.create(:user)
 
-    article_1 = user.articles.build_with_factory
-    article_2 = user.articles.factory(:featured_article).build_with_factory
-    article_3 = user.articles.build_with_factory
+    post_1 = user.posts.build_with_factory
+    post_2 = user.posts.factory(:published_post).build_with_factory
+    post_3 = user.posts.build_with_factory
 
-    expect(article_1).not_to be_featured
-    expect(article_2).to be_featured
-    expect(article_3).not_to be_featured
+    expect(post_1).not_to be_published
+    expect(post_2).to be_published
+    expect(post_3).not_to be_published
   end
 end

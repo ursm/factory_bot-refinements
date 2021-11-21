@@ -7,14 +7,20 @@ describe FactoryBot::Refinements::RSpec do
     build  :user.as(:tricknotes), name: 'tricknotes'
 
     example do
-      expect(user.name).to eq('john')
-      expect(user).to be_persisted
+      expect(user).to have_attributes(
+        name:       'john',
+        persisted?: true,
+      )
 
-      expect(ursm.name).to eq('ursm')
-      expect(ursm).to be_persisted
+      expect(ursm).to have_attributes(
+        name:       'ursm',
+        persisted?: true,
+      )
 
-      expect(tricknotes.name).to eq('tricknotes')
-      expect(tricknotes).not_to be_persisted
+      expect(tricknotes).to have_attributes(
+        name:       'tricknotes',
+        persisted?: false,
+      )
     end
   end
 
