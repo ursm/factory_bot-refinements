@@ -30,12 +30,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      ACTIVERECORD: ${{ matrix.activerecord }}
+      FACTORY_BOT: ${{ matrix.factory_bot }}
+
     steps:
     - uses: actions/checkout@v2
-
-    - run: |
-        echo "gem 'factory_bot', '${{ matrix.factory_bot }}'" >> Gemfile
-        sed --in-place "s/gem 'activerecord'/gem 'activerecord', '${{ matrix.activerecord }}'/" Gemfile
 
     - uses: ruby/setup-ruby@v1
       with:
