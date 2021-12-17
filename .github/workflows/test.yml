@@ -15,18 +15,15 @@ jobs:
         factory_bot:
           - ~> 6.0
         activerecord:
-          - ~> 6.1.0
+          - ~> 7.0.0
 
         include:
           - ruby: 3.0
             factory_bot: ~> 5.0 # previous version
-            activerecord: ~> 6.1.0
+            activerecord: ~> 7.0.0
           - ruby: 3.0
             factory_bot: ~> 6.0
-            activerecord: ~> 6.0.0 # previous version
-          - ruby: 3.0
-            factory_bot: ~> 6.0
-            activerecord: ~> 7.0.0.alpha # pre-release version
+            activerecord: ~> 6.1.0 # previous version
 
     runs-on: ubuntu-latest
 
