@@ -1,0 +1,66 @@
+PATH
+  remote: .
+  specs:
+    factory_bot-refinements (0.1.1)
+      factory_bot
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activemodel (7.0.3.1)
+      activesupport (= 7.0.3.1)
+    activerecord (7.0.3.1)
+      activemodel (= 7.0.3.1)
+      activesupport (= 7.0.3.1)
+    activesupport (7.0.3.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    concurrent-ruby (1.1.10)
+    debug (1.6.2)
+      irb (>= 1.3.6)
+      reline (>= 0.3.1)
+    diff-lcs (1.5.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
+    io-console (0.5.11)
+    irb (1.4.1)
+      reline (>= 0.3.0)
+    minitest (5.16.2)
+    rake (13.0.6)
+    reline (0.3.1)
+      io-console (~> 0.5)
+    rspec (3.11.0)
+      rspec-core (~> 3.11.0)
+      rspec-expectations (~> 3.11.0)
+      rspec-mocks (~> 3.11.0)
+    rspec-core (3.11.0)
+      rspec-support (~> 3.11.0)
+    rspec-expectations (3.11.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-mocks (3.11.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.11.0)
+    rspec-support (3.11.0)
+    sqlite3 (1.4.4)
+    tzinfo (2.0.5)
+      concurrent-ruby (~> 1.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  activerecord
+  debug
+  factory_bot
+  factory_bot-refinements!
+  rake
+  rspec
+  sqlite3
+
+BUNDLED WITH
+   2.3.20

@@ -6,6 +6,8 @@ on:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
         ruby:
@@ -13,31 +15,13 @@ jobs:
           - 3.0
           - 3.1
           - head
-        factory_bot:
-          - ~> 6.0
-        activerecord:
-          - ~> 7.0.0
-
-        include:
-          - ruby: 3.0
-            factory_bot: ~> 5.0 # previous version
-            activerecord: ~> 7.0.0
-          - ruby: 3.0
-            factory_bot: ~> 6.0
-            activerecord: ~> 6.1.0 # previous version
-
-    runs-on: ubuntu-latest
-
-    env:
-      ACTIVERECORD: ${{ matrix.activerecord }}
-      FACTORY_BOT: ${{ matrix.factory_bot }}
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
 
-    - run: bundle exec rspec
+      - run: bundle exec rspec
