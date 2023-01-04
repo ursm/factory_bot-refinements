@@ -18,21 +18,13 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     concurrent-ruby (1.1.10)
-    debug (1.6.2)
-      irb (>= 1.3.6)
-      reline (>= 0.3.1)
     diff-lcs (1.5.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    io-console (0.5.11)
-    irb (1.4.1)
-      reline (>= 0.3.0)
     minitest (5.17.0)
     rake (13.0.6)
-    reline (0.3.1)
-      io-console (~> 0.5)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -55,7 +47,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
-  debug
   factory_bot
   factory_bot-refinements!
   rake
@@ -63,4 +54,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   2.3.20
+   2.4.2
